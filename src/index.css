@@ -21,13 +21,50 @@ body {
 }
 
 h1 {
-    @apply text-6xl text-red-600 border-b-4 border-double border-red-600;
+    @apply text-6xl text-red-600 border-b-4 border-double border-red-600 mb-2 pb-2;
     font-family: "Winona";
 }
 
 h2 {
-    @apply text-3xl text-red-400;
+    @apply text-3xl text-red-400 my-2;
     font-family: "Alverata Bold";
+}
+
+h3 {
+    @apply text-green-600 my-2 text-center uppercase;
+    font-family: "Alverata Bold";
+}
+
+b {
+    @apply text-amber-500;
+}
+
+input[type="radio"] {
+    @apply opacity-0 w-0;
+}
+
+input[type="radio"]+label {
+    @apply bg-stone-700 rounded-md p-4 inline-block w-full text-center;
+}
+
+input[type="radio"]:checked+label {
+    @apply bg-amber-700 rounded-md p-4;
+}
+
+table {
+    @apply rounded-md text-center w-full;
+}
+
+thead {
+    @apply border-b-2 border-red-600 font-bold;
+}
+
+td {
+    @apply px-2 py-1;
+}
+
+td:nth-child(even) {
+    @apply bg-stone-800;
 }
 
 .pseudo {
