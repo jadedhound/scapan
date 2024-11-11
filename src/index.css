@@ -44,7 +44,7 @@ input[type="radio"] {
 }
 
 input[type="radio"]+label {
-    @apply bg-stone-700 rounded-md p-4 inline-block w-full text-center;
+    @apply bg-stone-700 rounded-md p-4 inline-block w-full text-center cursor-pointer;
 }
 
 input[type="radio"]:checked+label {

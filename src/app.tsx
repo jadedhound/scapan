@@ -8,23 +8,12 @@ const App: Component = () => {
       <Kindred />
       <Class />
       <Stats />
-      <h2>Traits</h2>
-      <h2>Equipment</h2>
-      <p>General, Class, Trinket</p>
-      <h2>Alignment</h2>
-      <p> 
-        Decide whether your character is Lawful, Neutral, or Chaotic and note this on your
-        character sheet.
-      </p>
-      <p><b>Class restrictions:</b> Clerics and friars may not be Chaotic.</p>
-      <h2>Level and XP</h2>
-      <p>Your character begins play at Level 1 with 0 XP.</p>
-      <h2>Name and Details</h2>
-      <p>
-        Referring to the tables listed under your character’s Kindred, choose a name for your character. 
-        Optionally, select a background and any extra details. You are now ready for adventure.
-      </p>
-
+      <Traits />
+      <Equipment />
+      <Alignment />
+      <LevelAndXP />
+      <NameAndDetails />
+      <Reroll />
     </main>
   );
 };
@@ -152,6 +141,7 @@ const Stats: Component = () => {
   return (
     <div class="">
       <h2>Stats</h2>        
+      <h3>Basics</h3>
       <table class="mb-4">
         <thead>
           <tr>
@@ -193,6 +183,83 @@ const Stats: Component = () => {
       </table>      
       <p><b>Skill Targets:</b> None</p>
       <p><b>Languages:</b> Woldish</p>
+    </div>
+  )
+}
+
+const Traits: Component = () => {
+  return (
+    <div>
+      <h2>Traits</h2>
+    </div>
+  )
+}
+
+const Equipment: Component = () => {
+  const GeneralItems = [["Common Clothes", 30], ["Backpack", 50], ["2 preserved rations", 40], ["Waterskin", 50], ["Tinderbox", 10], ["Belt pouch", 10], ["3d6 gp", 36]];
+  return (
+    <div>
+      <h2>Equipment</h2>
+      <h3>General</h3>
+      <table class="mb-4">
+        <thead>
+          <tr>
+            <td>Item</td>
+            <td>Weight</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>      
+      <h3>Class</h3>
+      <p><b>Trinket:</b> None</p>
+    </div>
+  )
+}
+
+const Alignment: Component = () => {
+  return (
+    <div>
+      <h2>Alignment</h2>
+      <p> 
+        Decide whether your character is Lawful, Neutral, or Chaotic and note this on your
+        character sheet.
+      </p>
+      <p><b>Class restrictions:</b> Clerics and friars may not be Chaotic.</p>
+    </div>
+  )
+}
+
+const LevelAndXP: Component = () => {
+  return (
+    <div>
+      <h2>Level and XP</h2>
+      <p>Your character begins play at Level 1 with 0 XP.</p>
+    </div>
+  )
+}
+
+const NameAndDetails: Component = () => {
+  return (
+    <div class="mb-4">
+      <h2>Name and Details</h2>
+      <p>
+        Referring to the tables listed under your character’s Kindred, choose a name for your character. 
+        Optionally, select a background and any extra details. You are now ready for adventure.
+      </p>
+    </div>
+  )
+}
+
+const Reroll: Component = () => {
+  return (
+    <div class="md:col-span-2 mx-auto text-center mb-4">
+      <button class="bg-amber-700 rounded p-4 font-bold uppercase w-full md:w-40">
+        Reroll
+      </button>
     </div>
   )
 }

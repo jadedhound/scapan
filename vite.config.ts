@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  base: "/docs/",
+  base: "/scapan/",
   build: {
     target: 'esnext',
     outDir: 'docs',
