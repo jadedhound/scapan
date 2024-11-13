@@ -1,10 +1,14 @@
 import { createSignal, createContext, useContext, Signal } from "solid-js";
 import { genAbilityArray, getSeed } from "./diceRoller";
+import { Kindred } from "./kindred";
+import { CharClass } from "./charClass";
 
 export type CharModel = {
   abi: number[];
   abiOptional: number[];
   hp: number;
+  kindred: Kindred,
+  class: CharClass,
 }
 
 function genAbiOptional(abi: number[]): number[] {
@@ -29,8 +33,10 @@ export const CharacterModelProvider = (props: any) => {
     abi,
     abiOptional: genAbiOptional(abi), 
     hp: getSeed(),
+    kindred: Kindred.Human,
+    class: CharClass.Fighter,
   };
-  const charSignal = createSignal(model);
+  const charSignal = createSignal(model, { equals: false });
   return (
     <CharModelContext.Provider value={ charSignal }>
       { props.children }

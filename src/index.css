@@ -44,11 +44,15 @@ input[type="radio"] {
 }
 
 input[type="radio"]+label {
-    @apply bg-stone-700 rounded-md p-4 inline-block w-full text-center cursor-pointer;
+    @apply bg-stone-700 rounded-md p-4 inline-block w-full text-center cursor-pointer border-2 border-transparent;
 }
 
 input[type="radio"]:checked+label {
     @apply bg-amber-700 rounded-md p-4;
+}
+
+input[type="radio"]:disabled+label {
+    @apply bg-transparent border-stone-400 rounded-md p-4 text-stone-400;
 }
 
 table {

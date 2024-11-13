@@ -1,19 +1,9 @@
-import { createSignal, For, Signal, type Component } from 'solid-js';
-import { CharModel, useCharModel } from './characterModel';
+import { createSignal, For, type Component } from 'solid-js';
+import { useCharModel } from './characterModel';
 
 export const AbilityScores: Component = () => {
-  const [char, setChar] = useCharModel();
+  const [char, _] = useCharModel();
   const [useOpt, setUseOpt] = createSignal(false);
-  const scoreToMod = (score: number): string => {
-    if (score <= 3) { return "-3" }
-    else if (score <= 5) { return "-2" }
-    else if (score <= 8) { return "-1" }
-    else if (score <= 12) { return "+0" }
-    else if (score <= 15) { return "+1" }
-    else if (score <= 17) { return "+2" }
-    else { return "+3" }
-  };
-  console.log(char());
   const abi = () => {
     if (useOpt()) { return char().abiOptional } else { return char().abi }
   }
@@ -37,8 +27,7 @@ export const AbilityScores: Component = () => {
               <br />
               ({ scoreToMod(item) })
             </div>            
-          )
-          }
+          )}
         </For>
       </div>
       <div class="flex gap-2 items-center">
@@ -58,3 +47,12 @@ export const AbilityScores: Component = () => {
   )
 }
 
+export function scoreToMod(score: number): string {
+    if (score <= 3) { return "-3" }
+    else if (score <= 5) { return "-2" }
+    else if (score <= 8) { return "-1" }
+    else if (score <= 12) { return "+0" }
+    else if (score <= 15) { return "+1" }
+    else if (score <= 17) { return "+2" }
+    else { return "+3" }
+  };
