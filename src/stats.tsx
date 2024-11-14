@@ -12,22 +12,43 @@ export const Stats: Component = () => {
   const hp = (): string => {
     const currChar = char();
     const sides = classStats().hp_die;
-    const base = fromSeed(currChar.hp, sides);
-    const stats = currChar.useOptional ? currChar.abiOptional : currChar.abi;
+    const i = (sides - 4) / 2;
+    let base = currChar.hp[i];
+    if (currChar.useOptHP && base <= 2) { base = currChar.hpAlt[i] }
+    const stats = currChar.useOptAbi ? currChar.abiOptional : currChar.abi;
     const conMod = scoreToMod(stats[2]);
     const conModAdj = conMod[0] === "-" ? -1 : 1;
     const total = Math.max(base + (conMod[1] * conModAdj), 1);
     return `1d${sides} + CON = ${base} ${conMod[0]} ${conMod[1]} = ${total} (min 1)`
   }
   const atk = () => getClassStats(char().class).attack;
+  const changeOpt = () => {
+    setChar((prev) => {
+      prev.useOptHP = !prev.useOptHP;
+      return prev
+    })
+  }
 
   return (
     <div>
       <h2>Stats</h2>
       <p><b>HP:</b> {hp()}</p>
+      <div class="flex gap-2 items-center">
+        <input
+          type="checkbox"
+          name="optHP"
+          class="w-6 h-6"
+          checked={char().useOptHP}
+          onChange={(_) => changeOpt()}
+        />
+        <label for="optHP" class="mt-2 w-2 grow">
+          <b>Re-rolling 1s and 2s: </b>
+          Reroll if dice roll is 1 or 2.
+        </label>
+      </div>
       <p><b>Attack:</b> +{atk()}</p>
       <p><b>AC:</b> None</p>
-      <p><b>Speed:</b> None</p>
+      <p><b>Speed:</b> Depends on encumberance system used.</p>
       <p>
         <b>Skill Targets: </b>
       </p>

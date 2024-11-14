@@ -19,4 +19,7 @@ export default defineConfig({
     target: 'esnext',
     outDir: 'docs',
   },
+  define: {
+    'APP_VERSION': JSON.stringify(process.env.npm_package_version),
+  }
 });

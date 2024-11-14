@@ -14,7 +14,10 @@ export const Reroll: Component = () => {
     }
   });
   const isDisabled = () => getWaitTime() > 0;
-  const rerollCharacter = () => setChar((prev) => regenState(prev))
+  const rerollCharacter = () => {
+    setNow((_) => Date.now())
+    setChar((prev) => regenState(prev));
+  }
   const btnText = () => {
     const sec = Math.ceil(getWaitTime() / 1000);
     return isDisabled() ? `reroll timeout: ${sec} secs` : "reroll"
@@ -22,7 +25,7 @@ export const Reroll: Component = () => {
 
 
   return (
-    <div class="md:col-span-2 lg:col-span-3 mx-auto text-center mb-4">
+    <div class="w-full md:col-span-2 lg:col-span-3 mx-auto text-center mb-4">
       <button
         class="bg-amber-700 border-2 border-transparent rounded p-4 font-bold uppercase w-full md:w-[50vw] lg:w-[25vw] disabled:bg-transparent disabled:border-stone-400 disabled:text-stone-400"
         onclick={() => rerollCharacter()}

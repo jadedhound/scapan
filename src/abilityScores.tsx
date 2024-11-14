@@ -4,11 +4,11 @@ import { State, useState } from './state';
 export const AbilityScores: Component = () => {
   const [char, setChar] = useState();
   const abi = () => {
-    if (char().useOptional) { return char().abiOptional } else { return char().abi }
+    if (char().useOptAbi) { return char().abiOptional } else { return char().abi }
   }
   const changeOpt = () => {
     setChar((prev) => {
-      prev.useOptional = !prev.useOptional;
+      prev.useOptAbi = !prev.useOptAbi;
       return prev
     })
   }
@@ -36,12 +36,12 @@ export const AbilityScores: Component = () => {
       <div class="flex gap-2 items-center">
         <input
           type="checkbox"
-          name="optionalReroll"
-          class="w-8 h-8"
-          checked={char().useOptional}
+          name="optAbi"
+          class="w-6 h-6"
+          checked={char().useOptAbi}
           onChange={(_) => changeOpt()}
         />
-        <label for="optionalReroll">
+        <label for="optAbi" class="mt-2 w-2 grow">
           <b>Optional Rule: </b>
           Reroll character if scores are all 8 or lower or if 2 or more scores are 6 or lower
         </label>

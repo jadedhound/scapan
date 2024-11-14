@@ -64,8 +64,8 @@ function getKindredClass(kindred: Kindred): Trait[] {
     case Kindred.Human:
       return [
         { name: "Decisiveness", desc: "Humans act first in tied initiative rolls." },
-        { name: "Leadership", desc: "+1 Loyalty Rating for retainers" },
-        { name: "Spirited", desc: "+10% XP" },
+        { name: "Leadership", desc: "+1 Loyalty Rating for retainers." },
+        { name: "Spirited", desc: "+10% XP." },
       ]
     case Kindred.Mossling:
       return [
@@ -79,7 +79,7 @@ function getKindredClass(kindred: Kindred): Trait[] {
         { name: "Armour and Weapons", desc: "Needs tailored equipment." },
         { name: "Defensive Bonus", desc: "+2 AC vs large creatures." },
         { name: "Mad Revelry", desc: "Play an enchanted melody to cause others to do a particular action." },
-        { name: "Moon Sight", desc: "Darkvision 60'" },
+        { name: "Moon Sight", desc: "Darkvision 60'." },
         { name: "Musical Instruments", desc: "Can use instruments to deal 1d4 damage." },
         { name: "Starting Equipment", desc: "Starts with a wind instrument (add to equipment)." },
         { name: "Vulnerable to Cold Iron", desc: "+1 damage taken from cold iron." },
