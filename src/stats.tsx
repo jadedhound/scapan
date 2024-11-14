@@ -1,12 +1,12 @@
 import { Component, createMemo, For, JSX } from "solid-js"
-import { CharClass } from "./charClass"
-import { useCharModel } from "./characterModel";
+import { CClass } from "./cClass"
+import { useState } from "./state";
 import { fromSeed } from "./diceRoller";
 import { Kindred } from "./kindred";
 import { scoreToMod } from "./abilityScores";
 
 export const Stats: Component = () => {
-  const [char, setChar] = useCharModel();
+  const [char, setChar] = useState();
   const classStats = createMemo(() => getClassStats(char().class));
   const kindredStats = createMemo(() => getKindredStats(char().kindred));
   const hp = (): string => {
@@ -120,60 +120,60 @@ type ClassStats = {
   skills?: string,
 }
 
-function getClassStats(charClass: CharClass): ClassStats {
+function getClassStats(charClass: CClass): ClassStats {
   switch (charClass) {
-    case CharClass.Bard:
+    case CClass.Bard:
       return {
         hp_die: 6,
         attack: 0,
         saves: [13, 14, 13, 15, 15],
         skills: "Decipher Document 6, Legerdemain 6, Listen 5, Monster Lore 5"
       }
-    case CharClass.Cleric:
+    case CClass.Cleric:
       return {
         hp_die: 6,
         attack: 0,
         saves: [11, 12, 13, 16, 14],
       }
-    case CharClass.Enchanter:
+    case CClass.Enchanter:
       return {
         hp_die: 6,
         attack: 0,
         saves: [11, 12, 13, 16, 14],
       }
-    case CharClass.Fighter:
+    case CClass.Fighter:
       return {
         hp_die: 8,
         attack: 1,
         saves: [12, 13, 14, 15, 16],
       }
-    case CharClass.Friar:
+    case CClass.Friar:
       return {
         hp_die: 4,
         attack: 0,
         saves: [11, 12, 13, 16, 14],
         skills: "Survival 5 (when foraging)"
       }
-    case CharClass.Hunter:
+    case CClass.Hunter:
       return {
         hp_die: 8,
         attack: 1,
         saves: [12, 13, 14, 15, 16],
         skills: "Alterness 6, Stalking 6, Survival 5, Tracking 5"
       }
-    case CharClass.Knight:
+    case CClass.Knight:
       return {
         hp_die: 8,
         attack: 1,
         saves: [12, 13, 12, 15, 15],
       }
-    case CharClass.Magician:
+    case CClass.Magician:
       return {
         hp_die: 4,
         attack: 0,
         saves: [14, 14, 13, 16, 14],
       }
-    case CharClass.Thief:
+    case CClass.Thief:
       return {
         hp_die: 4,
         attack: 0,

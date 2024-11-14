@@ -1,8 +1,8 @@
 import { Component, createEffect, createSignal } from "solid-js"
-import { genDefaultCharModel, useCharModel } from "./characterModel";
+import { regenState, useState } from "./state";
 
 export const Reroll: Component = () => {
-  const [char, setChar] = useCharModel();
+  const [char, setChar] = useState();
   const [now, setNow] = createSignal(Date.now());
   const getWaitTime = () => Math.max(0, char().timeout - now());
   createEffect(async () => {
@@ -14,17 +14,7 @@ export const Reroll: Component = () => {
     }
   });
   const isDisabled = () => getWaitTime() > 0;
-  const rerollCharacter = () => {
-    setChar((prev) => {
-      const def = genDefaultCharModel();
-      return {
-        ...def,
-        useOptional: prev.useOptional,
-        class: prev.class,
-        kindred: prev.kindred,
-      }
-    })
-  }
+  const rerollCharacter = () => setChar((prev) => regenState(prev))
   const btnText = () => {
     const sec = Math.ceil(getWaitTime() / 1000);
     return isDisabled() ? `reroll timeout: ${sec} secs` : "reroll"

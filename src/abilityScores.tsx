@@ -1,8 +1,8 @@
 import { createSignal, For, type Component } from 'solid-js';
-import { CharModel, useCharModel } from './characterModel';
+import { State, useState } from './state';
 
 export const AbilityScores: Component = () => {
-  const [char, setChar] = useCharModel();
+  const [char, setChar] = useState();
   const abi = () => {
     if (char().useOptional) { return char().abiOptional } else { return char().abi }
   }

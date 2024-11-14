@@ -4,9 +4,9 @@ import type { Component } from 'solid-js';
 import { AbilityScores } from './abilityScores';
 
 import './index.css';
-import { CharacterModelProvider } from './characterModel';
+import { StateProvider } from './state';
 import { KindredView } from './kindred';
-import { CharClassView } from './charClass'
+import { CClassView } from './cClass'
 import { Stats } from './stats';
 import { Reroll } from './reroll';
 import { Traits } from './traits';
@@ -81,12 +81,12 @@ const NameAndDetails: Component = () => {
 
 const App: Component = () => {
   return (
-    <CharacterModelProvider>
+    <StateProvider>
       <main class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         <Title />
         <AbilityScores />
         <KindredView />
-        <CharClassView />
+        <CClassView />
         <Stats />
         <Traits />
         <Equipment />
@@ -95,7 +95,7 @@ const App: Component = () => {
         <NameAndDetails />
         <Reroll />
       </main>
-    </CharacterModelProvider>
+    </StateProvider>
   );
 };
 

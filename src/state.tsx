@@ -1,20 +1,20 @@
 import { createSignal, createContext, useContext, Signal } from "solid-js";
 import { genAbilityArray, getSeed } from "./diceRoller";
 import { Kindred } from "./kindred";
-import { CharClass } from "./charClass";
+import { CClass } from "./cClass";
 import { genTimeout } from "./reroll";
 
-export type CharModel = {
+export type State = {
   abi: number[],
   abiOptional: number[],
   useOptional: boolean,
   hp: number,
   kindred: Kindred,
-  class: CharClass,
+  class: CClass,
   timeout: number,
 }
 
-export function genDefaultCharModel(): CharModel {
+function genDefaultState(): State {
   const abi = genAbilityArray();
   return {
     abi,
@@ -22,8 +22,17 @@ export function genDefaultCharModel(): CharModel {
     useOptional: false,
     hp: getSeed(),
     kindred: Kindred.Human,
-    class: CharClass.Fighter,
+    class: CClass.Fighter,
     timeout: genTimeout(),
+  }
+}
+
+export function regenState(prev: State): State {
+  return {
+    ...genDefaultState(),
+    useOptional: prev.useOptional,
+    class: prev.class,
+    kindred: prev.kindred,
   }
 }
 
@@ -41,17 +50,17 @@ function genAbiOptional(abi: number[]): number[] {
   }
 }
 
-const CharModelContext = createContext();
+const StateContext = createContext();
 
-export const CharacterModelProvider = (props: any) => {
-  const charSignal = createSignal(genDefaultCharModel(), { equals: false });
+export const StateProvider = (props: any) => {
+  const state = createSignal(genDefaultState(), { equals: false });
   return (
-    <CharModelContext.Provider value={charSignal}>
+    <StateContext.Provider value={state}>
       {props.children}
-    </CharModelContext.Provider>
+    </StateContext.Provider>
   );
 }
 
-export function useCharModel(): Signal<CharModel> {
-  return useContext(CharModelContext) as Signal<CharModel>
+export function useState(): Signal<State> {
+  return useContext(StateContext) as Signal<State>
 }
