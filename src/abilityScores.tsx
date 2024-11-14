@@ -1,13 +1,18 @@
 import { createSignal, For, type Component } from 'solid-js';
-import { useCharModel } from './characterModel';
+import { CharModel, useCharModel } from './characterModel';
 
 export const AbilityScores: Component = () => {
-  const [char, _] = useCharModel();
-  const [useOpt, setUseOpt] = createSignal(false);
+  const [char, setChar] = useCharModel();
   const abi = () => {
-    if (useOpt()) { return char().abiOptional } else { return char().abi }
+    if (char().useOptional) { return char().abiOptional } else { return char().abi }
   }
-  
+  const changeOpt = () => {
+    setChar((prev) => {
+      prev.useOptional = !prev.useOptional;
+      return prev
+    })
+  }
+
   return (
     <div class="flex flex-col gap-2">
       <h2>Ability Scores</h2>
@@ -18,25 +23,23 @@ export const AbilityScores: Component = () => {
         <div class="font-bold mb-[-1px]">WIS</div>
         <div class="font-bold mb-[-1px]">INT</div>
         <div class="font-bold mb-[-1px]">CHA</div>
-        <For
-          each={ abi() }
-        >
+        <For each={abi()}>
           {(item) => (
             <div>
-              {item} 
+              {item}
               <br />
-              ({ scoreToMod(item) })
-            </div>            
+              ({scoreToMod(item)})
+            </div>
           )}
         </For>
       </div>
       <div class="flex gap-2 items-center">
-        <input 
-          type="checkbox" 
-          name="optionalReroll" 
-          class="w-8 h-8" 
-          checked={ useOpt() } 
-          onChange={ (_) => setUseOpt((preVal) => !preVal) } 
+        <input
+          type="checkbox"
+          name="optionalReroll"
+          class="w-8 h-8"
+          checked={char().useOptional}
+          onChange={(_) => changeOpt()}
         />
         <label for="optionalReroll">
           <b>Optional Rule: </b>
@@ -47,12 +50,12 @@ export const AbilityScores: Component = () => {
   )
 }
 
-export function scoreToMod(score: number): string {
-    if (score <= 3) { return "-3" }
-    else if (score <= 5) { return "-2" }
-    else if (score <= 8) { return "-1" }
-    else if (score <= 12) { return "+0" }
-    else if (score <= 15) { return "+1" }
-    else if (score <= 17) { return "+2" }
-    else { return "+3" }
-  };
+export function scoreToMod(score: number): [string, number] {
+  if (score <= 3) { return ["-", 3] }
+  else if (score <= 5) { return ["-", 2] }
+  else if (score <= 8) { return ["-", 1] }
+  else if (score <= 12) { return ["+", 0] }
+  else if (score <= 15) { return ["+", 1] }
+  else if (score <= 17) { return ["+", 2] }
+  else { return ["+", 3] }
+};

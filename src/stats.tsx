@@ -1,8 +1,9 @@
-import { Component, createMemo, JSX } from "solid-js"
+import { Component, createMemo, For, JSX } from "solid-js"
 import { CharClass } from "./charClass"
 import { useCharModel } from "./characterModel";
 import { fromSeed } from "./diceRoller";
 import { Kindred } from "./kindred";
+import { scoreToMod } from "./abilityScores";
 
 export const Stats: Component = () => {
   const [char, setChar] = useCharModel();
@@ -12,8 +13,11 @@ export const Stats: Component = () => {
     const currChar = char();
     const sides = classStats().hp_die;
     const base = fromSeed(currChar.hp, sides);
-
-    return "1d" + sides + " + CON = " + base + " + (";
+    const stats = currChar.useOptional ? currChar.abiOptional : currChar.abi;
+    const conMod = scoreToMod(stats[2]);
+    const conModAdj = conMod[0] === "-" ? -1 : 1;
+    const total = Math.max(base + (conMod[1] * conModAdj), 1);
+    return `1d${sides} + CON = ${base} ${conMod[0]} ${conMod[1]} = ${total} (min 1)`
   }
   const atk = () => getClassStats(char().class).attack;
 
@@ -26,40 +30,38 @@ export const Stats: Component = () => {
       <p><b>Speed:</b> None</p>
       <p>
         <b>Skill Targets: </b>
+      </p>
+      <ul class="list-disc pl-5">
         {
           maybeView(() => kindredStats().skills, (skills) => (
-            <span><i>{char().kindred}:</i> {skills} </span>
+            <li><i>{char().kindred}:</i> {skills} </li>
           ))
         }
         {
           maybeView(() => classStats().skills, (skills) => (
-            <span><i>{char().class}:</i> {skills} </span>
+            <li><i>{char().class}:</i> {skills} </li>
           ))
         }
-      </p>
+      </ul>
       <p><b>Languages:</b> {kindredStats().languages}</p>
 
       <h3>Save Targets</h3>
-      <table class="mb-4">
-        <thead>
-          <tr>
-            <td>Doom</td>
-            <td>Ray</td>
-            <td>Hold</td>
-            <td>Blast</td>
-            <td>Spell</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>10</td>
-            <td>10</td>
-            <td>10</td>
-            <td>10</td>
-            <td>10</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="grid grid-cols-5 text-center border-2 border-stone-200 rounded p-2 [&>*>*]:p-2">
+        <div class="contents [&>:nth-child(even)]:bg-amber-950 [&>*]:mb-[-1px] font-bold">
+          <div>Doom</div>
+          <div>Ray</div>
+          <div>Hold</div>
+          <div>Blast</div>
+          <div>Spell</div>
+        </div>
+        <div class="contents [&>:nth-child(even)]:bg-amber-950">
+          <For each={classStats().saves}>
+            {(item) => (
+              <div> {item} </div>
+            )}
+          </For>
+        </div>
+      </div>
     </div>
   )
 }

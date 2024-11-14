@@ -8,20 +8,14 @@ import { CharacterModelProvider } from './characterModel';
 import { KindredView } from './kindred';
 import { CharClassView } from './charClass'
 import { Stats } from './stats';
+import { Reroll } from './reroll';
+import { Traits } from './traits';
 
 const Title: Component = () => {
   return (
-    <div class="md:col-span-2 mx-auto text-center mb-4">
+    <div class="md:col-span-2 lg:col-span-3 mx-auto text-center mb-4">
       <h1>Scapan</h1>
       <p class="italic text-xl">Dolmenwood Character Generator</p>
-    </div>
-  )
-}
-
-const Traits: Component = () => {
-  return (
-    <div>
-      <h2>Traits</h2>
     </div>
   )
 }
@@ -85,20 +79,10 @@ const NameAndDetails: Component = () => {
   )
 }
 
-const Reroll: Component = () => {
-  return (
-    <div class="md:col-span-2 mx-auto text-center mb-4">
-      <button class="bg-amber-700 rounded p-4 font-bold uppercase w-full md:w-40">
-        Reroll
-      </button>
-    </div>
-  )
-}
-
 const App: Component = () => {
   return (
     <CharacterModelProvider>
-      <main class="md:grid md:grid-cols-2 gap-x-8 gap-y-4">
+      <main class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         <Title />
         <AbilityScores />
         <KindredView />
