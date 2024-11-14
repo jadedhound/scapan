@@ -44,7 +44,7 @@ const Equipment: Component = () => {
             <td>0</td>
           </tr>
         </tbody>
-      </table>      
+      </table>
       <h3>Class</h3>
       <p><b>Trinket:</b> None</p>
     </div>
@@ -55,7 +55,7 @@ const Alignment: Component = () => {
   return (
     <div>
       <h2>Alignment</h2>
-      <p> 
+      <p>
         Decide whether your character is Lawful, Neutral, or Chaotic and note this on your
         character sheet.
       </p>
@@ -78,7 +78,7 @@ const NameAndDetails: Component = () => {
     <div class="mb-4">
       <h2>Name and Details</h2>
       <p>
-        Referring to the tables listed under your character’s Kindred, choose a name for your character. 
+        Referring to the tables listed under your character’s Kindred, choose a name for your character.
         Optionally, select a background and any extra details. You are now ready for adventure.
       </p>
     </div>

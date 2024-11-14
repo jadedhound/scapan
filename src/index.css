@@ -6,14 +6,14 @@
     font-family: "Winona";
     font-weight: 700;
     font-display: swap;
-    src: url("./src/assets/Winona.woff2") format("woff2");
+    src: url("assets/Winona.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "Alverata Bold";
     font-weight: 700;
     font-display: swap;
-    src: url("./src/assets/Alverata-Bold.woff2") format("woff2");
+    src: url("assets/Alverata-Bold.woff2") format("woff2");
 }
 
 body {
