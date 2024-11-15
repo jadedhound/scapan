@@ -63,7 +63,7 @@ const Footer: Component = () => {
           <path d="M169 273c-25 0-35 33-35 53s10 52 35 52 35-32 35-52-10-53-35-53zM345 273c-25 0-35 33-35 53s10 52 35 52 35-32 35-52-10-53-35-53z" />
           <path d="M449 168c5-15 7-31 7-46 0-21-5-31-14-50-43 0-71 8-103 34a367 367 0 0 0-162 1c-33-26-61-35-105-35-9 19-14 29-14 50 0 15 3 31 8 46-27 31-40 69-40 109 0 31 5 64 19 91 38 75 144 72 217 72 71 0 171 2 207-72 14-28 17-60 17-91 0-40-11-78-37-109zM280 423h-46c-67 0-144-13-144-97 0-42 25-79 70-79 18 0 36 3 54 5a283 283 0 0 0 86 0c18-2 36-5 54-5 45 0 70 37 70 79 0 84-77 97-144 97z" />
         </svg>
-        <div class="mt-1 font-bold">Source</div>
+        <div class="mt-1 font-bold">v{APP_VERSION}</div>
       </a>
       <a href="https://www.dolmenwood.necroticgnome.com/rules/doku.php?id=start" target="_blank" class="flex items-center gap-1">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 330 349" class="w-6 h-6">

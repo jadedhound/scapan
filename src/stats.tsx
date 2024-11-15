@@ -10,16 +10,20 @@ export const Stats: Component = () => {
   const classStats = createMemo(() => getClassStats(char().class));
   const kindredStats = createMemo(() => getKindredStats(char().kindred));
   const hp = (): string => {
-    const currChar = char();
+    const curr = char();
     const sides = classStats().hp_die;
     const i = (sides - 4) / 2;
-    let base = currChar.hp[i];
-    if (currChar.useOptHP && base <= 2) { base = currChar.hpAlt[i] }
-    const stats = currChar.useOptAbi ? currChar.abiOptional : currChar.abi;
+    const base = curr.useOptHP ? curr.hpAlt[i] : curr.hp[i];
+    const stats = curr.useOptAbi ? curr.abiOptional : curr.abi;
     const conMod = scoreToMod(stats[2]);
     const conModAdj = conMod[0] === "-" ? -1 : 1;
     const total = Math.max(base + (conMod[1] * conModAdj), 1);
     return `1d${sides} + CON = ${base} ${conMod[0]} ${conMod[1]} = ${total} (min 1)`
+  }
+  const mr = () => {
+    const curr = char();
+    const stats = curr.useOptAbi ? curr.abiOptional : curr.abi;
+    return scoreToMod(stats[3])
   }
   const atk = () => getClassStats(char().class).attack;
   const changeOpt = () => {
@@ -67,13 +71,14 @@ export const Stats: Component = () => {
       <p><b>Languages:</b> {kindredStats().languages}</p>
 
       <h3>Save Targets</h3>
-      <div class="grid grid-cols-5 text-center border-2 border-stone-200 rounded p-2 [&>*>*]:p-2">
+      <div class="grid grid-cols-6 text-center border-2 border-stone-200 rounded p-2 [&>*>*]:p-2">
         <div class="contents [&>:nth-child(even)]:bg-amber-950 [&>*]:mb-[-1px] font-bold">
           <div>Doom</div>
           <div>Ray</div>
           <div>Hold</div>
           <div>Blast</div>
           <div>Spell</div>
+          <div>MR</div>
         </div>
         <div class="contents [&>:nth-child(even)]:bg-amber-950">
           <For each={classStats().saves}>
@@ -81,6 +86,7 @@ export const Stats: Component = () => {
               <div> {item} </div>
             )}
           </For>
+          <div>{mr()}</div>
         </div>
       </div>
     </div>

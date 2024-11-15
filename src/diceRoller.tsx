@@ -6,13 +6,13 @@ export function getSeed(): number {
   return Math.random();
 }
 
-export function genAbilityArray(): number[] {
+export function genAbi(): number[] {
   return Array(6).fill(0).map((_) => {
     return d6() + d6() + d6();
   });
 }
 
-export function genAbiOptional(abi: number[]): number[] {
+export function genAbiOpt(abi: number[]): number[] {
   const isValid = (abi: number[]): boolean => {
     const allLessThan8 = abi.filter(num => num <= 8).length >= 6;
     const twoVeryLow = abi.filter(num => num <= 6).length >= 2;
@@ -22,21 +22,26 @@ export function genAbiOptional(abi: number[]): number[] {
   if (isValid(abi)) {
     return abi
   } else {
-    return genAbiOptional(genAbilityArray())
+    return genAbiOpt(genAbi())
   }
 }
 
-export function genHP(opt?: boolean): number[] {
-  const result = [d4(), d6(), d8()];
-  if (opt) {
-    if (result.find((val) => val <= 2)) {
-      return genHP(opt)
-    } else {
-      return result
+export function genHP(): number[] {
+  return [d4(), d6(), d8()];
+}
+
+export function genOptHP(def: number[]): number[] {
+  return def.map((val, i) => {
+    let currVal = val;
+    while (currVal <= 2) {
+      currVal = fromSeed(getSeed(), (i * 2) + 4);
     }
-  } else {
-    return result
-  }
+    return currVal
+  })
+}
+
+export function multiRoll(num: number, sides: number): number[] {
+  return Array(num).fill(0).map((_) => fromSeed(getSeed(), sides))
 }
 
 function d4() { return fromSeed(getSeed(), 4) }
