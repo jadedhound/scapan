@@ -38,6 +38,6 @@ export const Reroll: Component = () => {
 }
 
 export function genTimeout(): number {
-  return Date.now() + (0.1 * 60 * 1000);
+  return Date.now() + (5 * 60 * 1000);
 }
 
